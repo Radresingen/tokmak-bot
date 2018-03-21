@@ -35,6 +35,6 @@ bot.telegram.setWebhook(process.env.BASE+process.env.BOT_TOKEN);
 const app = express()
 app.get('/', (req, res) => res.send('Hello World!'))
 app.use(bot.webhookCallback('/'+process.env.BOT_TOKEN));
-app.listen(process.env.PORT || 3000, () => {
-  console.log('Example app listening on port 3000!')
+app.listen(process.env.PORT || 80, () => {
+  console.log('Example app listening on port!')
 })
