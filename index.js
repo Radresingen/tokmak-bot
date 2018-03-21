@@ -2,6 +2,8 @@ const Telegraf = require('telegraf')
 const Extra = require('telegraf/extra')
 const session = require('telegraf/session')
 
+const express = require('express')
+
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 bot.use(session({ttl:60000})); // 1 min
@@ -28,4 +30,11 @@ bot.use(ctx => {
   ctx.session[ctx.chat.id] = false;
 })
 
-bot.startPolling();
+bot.telegram.setWebhook(process.env.BASE+process.env.BOT_TOKEN);
+
+const app = express()
+app.get('/', (req, res) => res.send('Hello World!'))
+app.use(bot.webhookCallback('/'+process.env.BOT_TOKEN));
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Example app listening on port 3000!')
+})
