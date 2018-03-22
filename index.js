@@ -8,6 +8,23 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 
 bot.use(session({ttl:60000})); // 1 min
 
+// Streak count
+bot.use(ctx => {
+  if(!ctx.session.strike || Date.now() - ctx.session.last > 3000){
+    ctx.session.last = Date.now();
+    ctx.session.strike = 1;
+  }
+  else {
+    ctx.session.strike++;
+    ctx.session.last = Date.now();
+  }
+});
+
+bot.use(ctx => {
+  if( ctx.session.strike > 5 )
+    ctx.reply(`Yaa boş yapma @${ctx.message.from}`);
+})
+
 bot.on('sticker', async ctx => {
   try{
     if( ctx.session[ctx.chat.id] ){
