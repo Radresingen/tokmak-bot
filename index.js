@@ -18,11 +18,12 @@ bot.use(ctx => {
     ctx.session.strike++;
     ctx.session.last = Date.now();
   }
+  console.log(`${ctx.message.from.id} streak ${ctx.session.strike}`);
 });
 
 bot.use(ctx => {
   if( ctx.session.strike > 5 )
-    ctx.reply(`Yaa boş yapma @${ctx.message.from}`);
+    ctx.reply(`Yaa boş yapma @${ctx.message.from.username}`);
 })
 
 bot.on('sticker', async ctx => {
