@@ -10,18 +10,18 @@ bot.use(session({ttl:60000})); // 1 min
 
 // Streak count
 bot.use(ctx => {
-  if(!ctx.session.strike || Date.now() - ctx.session.last > 3000){
-    ctx.session.last = Date.now();
+  if(!ctx.session.strike || Date.now() - ctx.session.last > 10000){
     ctx.session.strike = 1;
   }
   else {
     ctx.session.strike++;
-    ctx.session.last = Date.now();
   }
-  console.log(`${ctx.message.from.id} streak ${ctx.session.strike}`);
+  ctx.session.last = Date.now();
+  console.log(`${ctx.message.from.username} streak ${ctx.session.strike}`);
 });
 
 bot.use(ctx => {
+  console.log(ctx.message.from.username, "bosyapma");
   if( ctx.session.strike > 5 )
     ctx.reply(`Yaa boş yapma @${ctx.message.from.username}`);
 })
