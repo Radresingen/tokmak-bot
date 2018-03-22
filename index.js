@@ -9,7 +9,7 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 bot.use(session({ttl:60000})); // 1 min
 
 // Streak count
-bot.use(ctx => {
+bot.use((ctx, next) => {
   if(!ctx.session.strike || Date.now() - ctx.session.last > 10000){
     ctx.session.strike = 1;
   }
@@ -18,13 +18,18 @@ bot.use(ctx => {
   }
   ctx.session.last = Date.now();
   console.log(`${ctx.message.from.username} streak ${ctx.session.strike}`);
+
+  next();
 });
 
-bot.use(ctx => {
-  console.log(ctx.message.from.username, "bosyapma");
-  if( ctx.session.strike > 5 )
+bot.use((ctx, next) => {
+  if( ctx.session.strike > 5 ){
+    console.log(ctx.message.from.username, "bosyapma");
     ctx.reply(`Yaa boş yapma @${ctx.message.from.username}`);
-})
+  }
+
+  next();
+});
 
 bot.on('sticker', async ctx => {
   try{
