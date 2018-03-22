@@ -19,12 +19,19 @@ bot.on('sticker', async ctx => {
         can_send_web_page_previews: false
       });
       //await ctx.deleteMessage();
+      
+      ctx.session[ctx.chat.id] = false;
+      
       return ctx.reply(`@${ctx.message.from.username} TOKMAKLANDIN`);
     }
     ctx.session[ctx.chat.id] = true;
   } catch (err) {
     console.log(err);
   }
+});
+
+bot.use(ctx => {
+  ctx.session[ctx.chat.id] = false;
 });
 
 bot.telegram.setWebhook(process.env.BASE+process.env.BOT_TOKEN);
