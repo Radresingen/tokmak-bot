@@ -43,7 +43,7 @@ bot.on('sticker', async ctx => {
         can_send_other_messages: false,
         can_send_web_page_previews: false
       });
-      //await ctx.deleteMessage();
+      await ctx.deleteMessage();
       
       ctx.session[ctx.chat.id] = false;
       
