@@ -10,6 +10,7 @@ bot.use(session({ttl:60000})); // 1 min
 
 // Streak count
 bot.use((ctx, next) => {
+  console.log(ctx);
   if(!ctx.session.streak || Date.now() - ctx.session.last > 10000){
     ctx.session.streak = 1;
   }
