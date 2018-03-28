@@ -24,14 +24,13 @@ bot.on('message', (ctx, next) => {
 });
 
 bot.use((ctx, next) => {
-  if( ctx.session.streak >= 5 ){
+  if( ctx.session.streak == 5 ){
     console.log(ctx.message.from.username, "bosyapma");
-    if(ctx.message.from.first_name === 'Nafiz')
-      ctx.reply(`yaa boş yapma amk nafizi`);
-    else
-      ctx.reply(`yaa boş yapma ${ctx.message.from.first_name}`);
-  
-    ctx.session.streak = 0;
+    ctx.reply(`yaa boş yapma ${ctx.message.from.first_name}`);
+  }
+  else if( ctx.session.streak == 7 ){
+    console.log(ctx.message.from.username, "bosyapma");
+    ctx.reply(`SANA BOŞ YAPMA DEDİM ${ctx.message.from.first_name}`);
   }
 
   next();
