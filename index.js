@@ -41,6 +41,14 @@ bot.hears("adamsin tokmak", (ctx, next) => {
 
 
 });
+
+bot.hears("ozur dilerim", (ctx, next) => {
+  ctx.reply("ozur dileyen adam lowdur. net lowdur. dilemeyin");
+  next();
+
+
+});
+
 bot.on('sticker', async ctx => {
   try{
     if( ctx.session[ctx.chat.id] ){
