@@ -10,7 +10,6 @@ bot.use(session({ttl:60000})); // 1 min
 
 // Streak count
 bot.on('message', (ctx, next) => {
-  console.log(ctx);
   if(!ctx.session.streak || Date.now() - ctx.session.last > 10000){
     ctx.session.streak = 1;
   }
@@ -18,8 +17,7 @@ bot.on('message', (ctx, next) => {
     ctx.session.streak++;
   }
   ctx.session.last = Date.now();
-  console.log(`${ctx.message.from.username} streak ${ctx.session.streak}`);
-
+  
   next();
 });
 
@@ -35,18 +33,16 @@ bot.use((ctx, next) => {
 
   next();
 });
-bot.hears("adamsin tokmak", (ctx, next) => {
-  ctx.reply("adamligin konusuldugu yerde ceketimi birakir kacarim");
+bot.on("text", (ctx, next) => {
+  const mapping = {
+    "adamsin tokmak":"adamligin konusuldugu yerde ceketimi birakir kacarim",
+    "ozur dilerim":"ozur dileyen adam lowdur. net lowdur. dilemeyin"
+  };
+  const x = mapping[ctx.message.text];
+  if(x!==undefined){
+    ctx.reply(x);
+  }
   next();
-
-
-});
-
-bot.hears("ozur dilerim", (ctx, next) => {
-  ctx.reply("ozur dileyen adam lowdur. net lowdur. dilemeyin");
-  next();
-
-
 });
 
 bot.on('sticker', async ctx => {
