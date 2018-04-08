@@ -35,7 +35,12 @@ bot.use((ctx, next) => {
 
   next();
 });
+bot.hears("adamsin tokmak", (ctx, next) => {
+  ctx.reply("adamligin konusuldugu yerde ceketimi birakir kacarim");
+  next();
 
+
+});
 bot.on('sticker', async ctx => {
   try{
     if( ctx.session[ctx.chat.id] ){
