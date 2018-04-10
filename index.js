@@ -18,20 +18,21 @@ bot.on('message', (ctx, next) => {
   }
   ctx.session.last = Date.now();
   
-  return next();
+   
+  next();
 });
 
-bot.use(async (ctx, next) => {
+bot.use( (ctx, next) => {
   if( ctx.session.streak == 5 ){
     console.log(ctx.message.from.username, "bosyapma");
-    await ctx.reply(`yaa boş yapma ${ctx.message.from.first_name}`);
+    ctx.reply(`yaa boş yapma ${ctx.message.from.first_name}`);
   }
   else if( ctx.session.streak == 7 ){
     console.log(ctx.message.from.username, "bosyapma");
-    await ctx.reply(`SANA BOŞ YAPMA DEDİM ${ctx.message.from.first_name}`);
+    ctx.reply(`SANA BOŞ YAPMA DEDİM ${ctx.message.from.first_name}`);
   }
 
-  return next();
+  next();
 });
 bot.on("text", (ctx, next) => {
   const mapping = {
@@ -42,7 +43,7 @@ bot.on("text", (ctx, next) => {
   if(x!==undefined){
     await ctx.reply(x);
   }
-  return next();
+  next();
 });
 
 bot.on('sticker', async ctx => {
