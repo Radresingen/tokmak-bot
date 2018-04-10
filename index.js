@@ -50,14 +50,18 @@ bot.on('sticker', async ctx => {
   try{
     if( ctx.session[ctx.chat.id] ){
       console.log("restrict mber", ctx.from.username);
-      await ctx.telegram.restrictChatMember(ctx.chat.id, ctx.from.id, {
+      ctx.telegram.restrictChatMember(ctx.chat.id, ctx.from.id, {
         until_date : Date.now()/1000 + 600, // 10m
         can_send_messages: true,
         can_send_media_messages: false,
         can_send_other_messages: false,
         can_send_web_page_previews: false
+      }).catch(err => {
+        console.log(err);
       });
-      await ctx.deleteMessage();
+      ctx.deleteMessage().catch(err => {
+        console.log(err);
+      });
       
       ctx.session[ctx.chat.id] = false;
       
@@ -66,6 +70,7 @@ bot.on('sticker', async ctx => {
     ctx.session[ctx.chat.id] = true;
   } catch (err) {
     console.log(err);
+    return ctx.reply("modasi gecmedi mi bu stickerin?! :/");
   }
 });
 
