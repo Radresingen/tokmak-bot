@@ -41,7 +41,7 @@ bot.on("text", (ctx, next) => {
   };
   const x = mapping[ctx.message.text];
   if(x!==undefined){
-    await ctx.reply(x);
+    ctx.reply(x);
   }
   next();
 });
