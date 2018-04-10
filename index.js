@@ -49,6 +49,7 @@ bot.on("text", (ctx, next) => {
 bot.on('sticker', async ctx => {
   try{
     if( ctx.session[ctx.chat.id] ){
+      console.log("restrict mber", ctx.from.username);
       await ctx.telegram.restrictChatMember(ctx.chat.id, ctx.from.id, {
         until_date : Date.now()/1000 + 600, // 10m
         can_send_messages: true,
