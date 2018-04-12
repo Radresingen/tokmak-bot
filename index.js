@@ -65,7 +65,7 @@ bot.on('sticker', async ctx => {
       });
       ctx.deleteMessage().catch(err => {
         console.log(err);
-       
+      });
       
       ctx.session[ctx.chat.id] = false;
       
