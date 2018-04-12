@@ -45,7 +45,7 @@ bot.on("text", (ctx, next) => {
     ctx.reply(x);
   }
   else if(ctx.message.text.indexOf('tokmak') > -1) {
-    ctx.reply('beni bu ise karistirmayin, pls.');
+    ctx.reply('durtmeyin pls. ben mesgul 1 tokmagim.');
   }
   next();
 });
