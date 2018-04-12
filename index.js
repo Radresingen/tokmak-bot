@@ -35,6 +35,7 @@ bot.use( (ctx, next) => {
   next();
 });
 bot.on("text", (ctx, next) => {
+  
   const mapping = {
     "adamsin tokmak":"adamligin konusuldugu yerde ceketimi birakir kacarim",
     "ozur dilerim":"ozur dileyen adam lowdur. net lowdur. dilemeyin"
@@ -42,6 +43,9 @@ bot.on("text", (ctx, next) => {
   const x = mapping[ctx.message.text];
   if(x!==undefined){
     ctx.reply(x);
+  }
+  else if(ctx.message.text.indexOf('tokmak') > -1) {
+    ctx.reply('beni bu ise karistirmayin, pls.');
   }
   next();
 });
@@ -61,7 +65,7 @@ bot.on('sticker', async ctx => {
       });
       ctx.deleteMessage().catch(err => {
         console.log(err);
-      });
+       
       
       ctx.session[ctx.chat.id] = false;
       
