@@ -23,35 +23,25 @@ bot.on('message', (ctx, next) => {
 });
 
 bot.use( (ctx, next) => {
-  if( ctx.session.streak == 5 ){
+  if( ctx.session.streak == 10){
     console.log(ctx.message.from.username, "bosyapma");
-    ctx.reply(`yaa boş yapma ${ctx.message.from.first_name}`);
+    ctx.telegram.restrictChatMember(ctx.chat.id, ctx.from.id, {
+        until_date : Date.now()/1000 + 600, // 10m
+        can_send_messages: false,
+        can_send_media_messages: false,
+        can_send_other_messages: false,
+        can_send_web_page_previews: false
+    }).then(()=>{
+        return ctx.reply(`@${ctx.message.from.username} TOKMAKLANDIN`);
+    }).catch(err => {
+        console.log(err);
+    });
   }
-  else if( ctx.session.streak == 7 ){
-    console.log(ctx.message.from.username, "bosyapma");
-    ctx.reply(`SANA BOŞ YAPMA DEDİM ${ctx.message.from.first_name}`);
-  }
+  
 
   next();
 });
-bot.on("text", (ctx, next) => {
-  
-  const mapping = {
-    "adamsin tokmak":"adamligin konusuldugu yerde ceketimi birakir kacarim",
-    "ozur dilerim":"ozur dileyen adam lowdur. net lowdur. dilemeyin"
-  };
-  const x = mapping[ctx.message.text];
-  if(x!==undefined){
-    ctx.reply(x);
-  }
-  else if(ctx.message.text.indexOf('tokmak') > -1) {
-    ctx.reply('durtmeyin pls. ben mesgul 1 tokmagim.');
-  }
-  else if(ctx.message.text.indexOf('gartic') > -1) {
-    ctx.reply('dolar olmus 4kusur. siz hala gartic oynayin. bos insanlarsiniz.');
-  }
-  next();
-});
+
 
 bot.on('sticker', async ctx => {
   try{
@@ -63,6 +53,8 @@ bot.on('sticker', async ctx => {
         can_send_media_messages: false,
         can_send_other_messages: false,
         can_send_web_page_previews: false
+      }).then(()=>{
+        return ctx.reply(`@${ctx.message.from.username} TOKMAKLANDIN`);
       }).catch(err => {
         console.log(err);
       });
