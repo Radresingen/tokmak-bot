@@ -47,6 +47,9 @@ bot.on("text", (ctx, next) => {
   else if(ctx.message.text.indexOf('tokmak') > -1) {
     ctx.reply('durtmeyin pls. ben mesgul 1 tokmagim.');
   }
+  else if(ctx.message.text.indexOf('gartic') > -1) {
+    ctx.reply('dolar olmus 4kusur. siz hala gartic oynayin. bos insanlarsiniz.');
+  }
   next();
 });
 
