@@ -21,7 +21,7 @@ bot.on('message', (ctx, next) => {
    
   next();
 });
-
+/*
 bot.use( (ctx, next) => {
   if( ctx.session.streak == 10){
     console.log(ctx.message.from.username, "bosyapma");
@@ -41,8 +41,8 @@ bot.use( (ctx, next) => {
 
   next();
 });
-
-
+*/
+/*
 bot.on('sticker', async ctx => {
   try{
     if( ctx.session[ctx.chat.id] ){
@@ -72,7 +72,7 @@ bot.on('sticker', async ctx => {
     return ctx.reply("modasi gecmedi mi bu stickerin?! :/");
   }
 });
-
+*/
 bot.use(ctx => {
   ctx.session[ctx.chat.id] = false;
 });
